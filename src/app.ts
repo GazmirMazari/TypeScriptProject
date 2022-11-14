@@ -2,6 +2,9 @@ class dragdropInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;
     element: HTMLFormElement;
+    titleInput: HTMLInputElement;
+    descriptionInput: HTMLInputElement;
+    numberOfPeople: HTMLInputElement
 
     constructor() {
         this.templateElement = document.getElementById('project-input')! as HTMLTemplateElement;
@@ -9,6 +12,11 @@ class dragdropInput {
 
         const importedNode = document.importNode(this.templateElement.content, true);
         this.element = importedNode.firstElementChild as HTMLFormElement;
+        this.element.id = "user-input";
+        this.titleInput = this.element.querySelector('#title') as HTMLInputElement;
+        this.descriptionInput = this.element.querySelector('#description') as HTMLInputElement;
+        this.numberOfPeople = this.element.querySelector('#people') as HTMLInputElement;
+        this.configure()
         this.attach()
     }
 
@@ -16,6 +24,14 @@ class dragdropInput {
         this.hostElement.insertAdjacentElement('afterbegin', this.element);
     }
 
+    private configure() {
+        this.element.addEventListener('submit', this.submitHandler.bind(this));
+    }
+
+    private submitHandler(event: Event) {
+        event.preventDefault();
+        console.log(this.titleInput.value);
+    }
 }
 
 
