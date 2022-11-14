@@ -12,3 +12,5 @@
 *.vsix
 
 node_modules
+
+*.js
